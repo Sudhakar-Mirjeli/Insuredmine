@@ -12,7 +12,6 @@ async function scheduleMessage(messageRQ) {
         job.attrs.data = messageRQ;
         messageRQ.taskId = taskId
         await MessageService.saveMessage(messageRQ);
-        // console.log(`Message saved: ${message}`);
     });
     await agenda.start();
     // Schedule the job to run at the specified date and time

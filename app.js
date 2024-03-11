@@ -28,7 +28,7 @@ const cpuThreshold = 0.7; // 70%
 
 // Function to restart the server
 const restartServer = () => {
-  app.close(() => {
+  server.close(() => {
     console.log('Server closed. Restarting...');
     server = app.listen(PORT, () => {
       console.log(`Server restarted on port ${PORT}.`);
