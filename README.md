@@ -7,11 +7,11 @@ Hi, I'm sudhakar Mirjeli having 3 years of work experience in software developme
 This project implements a set of APIs for insurance-related operations, including bulk upload of CSV data, searching for policies by username, providing aggregated policy information for each user, tracking real-time CPU utilization of the node server, and creating a post-service to insert messages into the database at specified dates and times.
 Features
 
- Bulk Upload API: Allows users to upload CSV data using Node.js worker threads for efficient processing.
- Search API: Enables users to search for policies by username, providing quick access to policy information.
- Aggregated Policy API: Provides aggregated policy information for each user, enhancing reporting capabilities.
- CPU Utilization Monitoring: Tracks real-time CPU utilization of the node server and automatically restarts the server at 70% usage to maintain optimal performance.
- Post-Service: Inserts messages into the database at specified dates and times, facilitating scheduled messages by using Agenda schedulers.
+     Bulk Upload API: Allows users to upload CSV data using Node.js worker threads for efficient processing.
+     Search API: Enables users to search for policies by username, providing quick access to policy information.
+     Aggregated Policy API: Provides aggregated policy information for each user, enhancing reporting capabilities.
+    CPU Utilization Monitoring: Tracks real-time CPU utilization of the node server and automatically restarts the server at 70% usage to maintain optimal performance.
+    Post-Service: Inserts messages into the database at specified dates and times, facilitating scheduled messages by using Agenda schedulers.
 
 **Technologies Used**
     Node.js
