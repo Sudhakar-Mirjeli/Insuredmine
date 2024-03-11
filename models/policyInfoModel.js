@@ -26,6 +26,4 @@ const policyInfoSchema = new mongoose.Schema({
 
 const PolicyInfoModel = mongoose.model('policyInfos', policyInfoSchema)
 
-module.exports = {
-    PolicyInfoModel
-}
+module.exports = PolicyInfoModel

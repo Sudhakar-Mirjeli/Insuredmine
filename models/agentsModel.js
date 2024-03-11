@@ -7,8 +7,6 @@ const agentsSchema = new mongoose.Schema({
     }
 }, { timeStamps: true })
 
-const AgentModel = mongoose.model('agents',agentsSchema )
+const AgentModel = mongoose.model('agents', agentsSchema)
 
-module.exports = {
-    AgentModel,
-}
+module.exports = AgentModel

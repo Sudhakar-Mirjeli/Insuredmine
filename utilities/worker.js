@@ -1,12 +1,12 @@
 const { workerData, parentPort } = require('node:worker_threads');
 const fs = require('fs');
 const csv = require('csv-parser');
-const { AgentModel } = require('../models/agentsModel');
-const { PolicyCarrierModel } = require('../models/policyCarriersModel');
-const { UsersAccountModel } = require('../models/usersAccountModel');
-const { PolicyCategoryModel } = require('../models/policyCategoriesModel');
-const { PolicyInfoModel } = require('../models/policyInfoModel');
-const { UserModel } = require('../models/usersModel');
+const  AgentModel = require('../models/agentsModel');
+const PolicyCarrierModel  = require('../models/policyCarriersModel');
+const UsersAccountModel  = require('../models/usersAccountModel');
+const PolicyCategoryModel  = require('../models/policyCategoriesModel');
+const PolicyInfoModel = require('../models/policyInfoModel');
+const UserModel = require('../models/usersModel');
 let connectToMongoDB = require('../dbConnection')
 
 connectToMongoDB()
@@ -26,19 +26,20 @@ try {
 
             for (let i = 0; i < csvData.length; i++) {
                 try {
+                    console.log("csvData.length", AgentModel,csvData[i].agent)
                     // creating Agent 
                     let agentObj = {
                         agentName: csvData[i].agent
                     }
-                    let agent = new AgentModel(agentObj)
-                    await agent.save()
-
+                    let agent = await AgentModel.create(agentObj)
+console.log("36666666666666666666")
                     // creating policy carriers
                     let policyCarrierObj = {
                         companyName: csvData[i].company_name
                     }
                     let policyCarrier = new PolicyCarrierModel(policyCarrierObj)
                     await policyCarrier.save()
+                    console.log("43333333333333333333")
 
                     // creating user account
                     let userAccountObj = {
@@ -46,6 +47,7 @@ try {
                     }
                     let userAccount = new UsersAccountModel(userAccountObj)
                     await userAccount.save()
+                    console.log("5111111111111111111111111111")
 
                     // creating policy categories
                     let policyCategoryObj = {
@@ -54,6 +56,7 @@ try {
                     let policyCategory = new PolicyCategoryModel(policyCategoryObj)
                     await policyCategory.save()
 
+                    console.log("600000000000000000000")
 
                     // creating user
                     let userObj = {
@@ -69,6 +72,7 @@ try {
                     }
                     let user = new UserModel(userObj)
                     await user.save()
+                    console.log("7666666666666666666")
 
 
                     // creating PolicyInfoModel
@@ -82,6 +86,8 @@ try {
                     }
                     const policyInfo = new PolicyInfoModel(policyInfoObj);
                     await policyInfo.save()
+                    console.log("900000000000000000000000000000000000")
+
 
                 } catch (error) {
                     this.logger.error(`Error while adding data into database: ${error}`);

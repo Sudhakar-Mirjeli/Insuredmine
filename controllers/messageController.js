@@ -1,9 +1,6 @@
 const HTTP_STATUS = require('../constants/http-status/httpConstants');
 const logger = require('../utilities/logger');
-const MessageService = require('../services/messageService')
 const AgendaService = require('../utilities/agendaService')
-
-
 
 /**
  * @method MessageController:getPolicyInfo

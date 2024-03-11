@@ -1,15 +1,20 @@
 const mongoose = require('mongoose');
+const Agenda = require('agenda');
 
-async function connectToMongoDB() {
+const DB_URL = "mongodb://localhost:27017/insured"
+
+const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb://localhost:27017/insured', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log('Connected to MongoDB');
+        const db = await mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+        const agenda = new Agenda({
+            db: { address: DB_URL, collection: 'agendaJobs' },
+            processEvery: '10 seconds'
+        })
+        console.log("Connected to MongoDB...");
+        return { db, agenda }
     } catch (error) {
-        console.error('Failed to connect to MongoDB', error);
+        console.log(error);
+        process.exit(1);
     }
-}
-
-module.exports = (connectToMongoDB)
+};
+module.exports = connectDB;

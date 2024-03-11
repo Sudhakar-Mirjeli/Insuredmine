@@ -1,19 +1,18 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const PORT = '5058'
 const app = express();
 const osUtils = require('os-utils');
 const routes = require('./routes/routes')
-let connectToMongoDB = require('./dbConnection')
+const connectDB = require('./dbConnection')
 
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // DB connection
-connectToMongoDB()
+connectDB()
 
 // Error handling
 app.use((err, req, res, next) => {
@@ -23,18 +22,6 @@ app.use((err, req, res, next) => {
 
 // API routes
 app.use('/api', routes)
-
-mongoose.connection.on('connected', () => {
-  console.info(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@`)
-  console.info(` Data Base connection successful. `)
-  console.info(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@`)
-});
-
-mongoose.connection.on('error', (err) => {
-  console.info(`***********************************`)
-  console.info(` Failed to connect MongoDB. ${err} `)
-  console.info(`*************************************`)
-});
 
 // Threshold for CPU usage
 const cpuThreshold = 0.7; // 70%
@@ -58,7 +45,6 @@ setInterval(() => {
     }
   });
 }, 1000); // Checks every second
-
 
 
 let server = app.listen(PORT, () => {

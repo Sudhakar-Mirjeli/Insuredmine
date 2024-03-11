@@ -9,6 +9,5 @@ const usersAccountSchema = new mongoose.Schema({
 
 const UsersAccountModel = mongoose.model('usersAccounts', usersAccountSchema)
 
-module.exports = {
-    UsersAccountModel
-}
+module.exports = UsersAccountModel
+

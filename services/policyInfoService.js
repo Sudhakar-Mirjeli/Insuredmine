@@ -3,7 +3,7 @@ const logger = require('../utilities/logger');
 const { Worker, isMainThread } = require('node:worker_threads');
 const fs = require('fs').promises;
 const policyInfoQueries = require('../services/policyInfoQueries');
-const { PolicyInfoModel } = require('../models/policyInfoModel');
+const PolicyInfoModel  = require('../models/policyInfoModel');
 
 
 /**

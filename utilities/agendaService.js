@@ -1,21 +1,24 @@
-const Agenda = require('agenda');
-const mongoose = require('mongoose');
-
-const db = mongoose.connection;
-const agenda = new Agenda({ mongo: db });
+const MessageService = require('../services/messageService');
+const uuid = require('uuid');
+let connectToMongoDB = require('../dbConnection')
 
 async function scheduleMessage(messageRQ) {
-    agenda.define(`SAVE_MESSAGE_${messageRQ.date}_${messageRQ.time}`, async (job) => {
-        const { date, time, message } = job.attrs.data;
+
+    const connect = await connectToMongoDB()
+    const agenda = connect.agenda
+
+    let taskId = uuid.v4();
+    await agenda.define(taskId, async (job) => {
+        job.attrs.data = messageRQ;
+        messageRQ.taskId = taskId
         await MessageService.saveMessage(messageRQ);
-        console.log(`Message saved: ${message}`);
+        // console.log(`Message saved: ${message}`);
     });
     await agenda.start();
-
     // Schedule the job to run at the specified date and time
-    await agenda.schedule(new Date(`${messageRQ.date} ${messageRQ.time}`) , "SAVE_MESSAGE_", messageRQ);
+    await agenda.schedule(new Date(messageRQ.date+' '+messageRQ.time).toUTCString(), taskId, messageRQ);
     return true;
 }
 
 
-module.exports = { agenda, scheduleMessage };
+module.exports = { scheduleMessage };

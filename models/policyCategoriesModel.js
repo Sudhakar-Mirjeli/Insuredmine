@@ -8,8 +8,6 @@ const policyCategorySchema = new mongoose.Schema({
     }
 }, { timeStamps: true })
 
-const PolicyCategoryModel = mongoose.model('policyCategories',policyCategorySchema )
+const PolicyCategoryModel = mongoose.model('policyCategories', policyCategorySchema)
 
-module.exports = {
-    PolicyCategoryModel
-}
+module.exports = PolicyCategoryModel

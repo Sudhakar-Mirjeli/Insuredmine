@@ -10,6 +10,4 @@ const policyCarrierSchema = new mongoose.Schema({
 
 const PolicyCarrierModel = mongoose.model('policyCarriers', policyCarrierSchema)
 
-module.exports = {
-    PolicyCarrierModel
-}
+module.exports = PolicyCarrierModel
